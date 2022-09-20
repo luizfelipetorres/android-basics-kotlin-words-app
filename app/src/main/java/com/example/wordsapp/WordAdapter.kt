@@ -16,6 +16,8 @@
 package com.example.wordsapp
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -78,6 +80,12 @@ class WordAdapter(private val letterId: String, context: Context) :
         val item = filteredWords[position]
         // Needed to call startActivity
         val context = holder.view.context
+
+        holder.button.setOnClickListener {
+            val queryUrl: Uri =Uri.parse("${DetailActivity.SEARCH_PREFIX}${item}")
+            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+            context.startActivity(intent)
+        }
 
         // Set the text of the WordViewHolder
         holder.button.text = item
